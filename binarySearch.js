@@ -1,29 +1,20 @@
+// binary search implementation
 
+function binarySearch(arr,start,target,end){
+    if(start > end) return false;
 
-function binarySearch(arr,x){
-    let low = arr[0];
-    let high = arr[arr.length-1];
-    let mid = arr[(low+high)/2];
-
-    if(x == mid){
-        console.log("found at mid");
+    let mid = Math.floor((start + end)/2);
+    if(arr[mid] == target) return true;
+    if(target < arr[mid]){
+        return binarySearch(arr,start,target,mid-1);
+    }else{
+        return binarySearch(arr,mid+1,target,end);
     }
-    if(x<mid){
-        high = mid-1;
-        for(let i=0; i<high; i++){
-            if(x == arr[i]){
-                console.log(x,"is found at position ", arr[i]);
-            }
-        }
-    }
-   if(x>mid){
-        for(let j=mid+1; j<arr.length-1; j++){
-            if(x == arr[j]){
-                console.log(x,"is found at position ", arr[j]);
-            }
-        }
-    }
-}
-var arr = [-6,-2,4,8,20];
+};
 
-binarySearch(arr,4);
+// testing
+
+var arr = [2, 6, 8, 10, 12, 14];
+let target = 13;
+
+console.log(binarySearch(arr,0,target,arr.length-1));
